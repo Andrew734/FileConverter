@@ -16,7 +16,6 @@ public class FileDataConverter {
         File inputFile = new File(fileName);
         File outputFile = new File("output.txt");
         BufferedReader bufferedReader;
-        StringBuffer buffer;
         int lineCounter = 0;
         String string;
 
@@ -29,9 +28,7 @@ public class FileDataConverter {
                 lineCounter++;
                 
                 if (lineSelector.isValidLine(lineCounter)) {
-                    buffer = new StringBuffer(string);
-                    buffer.reverse();
-                    bufferWriter.write(buffer.toString());
+                    bufferWriter.write(reversLine(string));
                     bufferWriter.newLine();
                 }
             }
@@ -41,5 +38,16 @@ public class FileDataConverter {
             System.out.println("An error occurred while operating with file");
             e.printStackTrace();
         }
+    }
+
+    private String reversLine(String line) {
+        StringBuilder stringBuilder = new StringBuilder(); 
+        char[] lineChars = line.toCharArray(); 
+
+        for (int i = lineChars.length-1; i>=0; i--) {
+            stringBuilder.append(lineChars[i]); 
+        }
+
+        return stringBuilder.toString();
     }
 }
